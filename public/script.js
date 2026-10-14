@@ -8,7 +8,6 @@
   const form = document.getElementById("predict-form");
   const submitBtn = document.getElementById("submit-btn");
   const resetBtn = document.getElementById("reset-btn");
-  const errorRetryBtn = document.getElementById("error-retry-btn");
 
   const stateIdle = document.getElementById("state-idle");
   const stateLoading = document.getElementById("state-loading");
@@ -297,10 +296,11 @@
   });
 
   resetBtn.addEventListener("click", () => {
+    form.reset();
+    stressHiddenInput.value = "";
+    segGroup.querySelectorAll(".seg-btn").forEach((b) => b.classList.remove("active"));
+    clearAllErrors();
     showState("idle");
   });
 
-  errorRetryBtn.addEventListener("click", () => {
-    showState("idle");
-  });
 })();

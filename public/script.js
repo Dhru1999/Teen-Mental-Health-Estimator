@@ -1,7 +1,9 @@
 (() => {
   "use strict";
 
-  const API_BASE = "http://127.0.0.1:2200";
+  // On Vercel the API is served from the same origin; locally it runs on uvicorn :2200
+  const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
+  const API_BASE = isLocal && location.port !== "2200" ? "http://127.0.0.1:2200" : "";
 
   const form = document.getElementById("predict-form");
   const submitBtn = document.getElementById("submit-btn");
@@ -281,7 +283,7 @@
     } catch (err) {
       renderError(
         "Can't reach the server",
-        `Couldn't connect to ${API_BASE}. Make sure the backend is running (uvicorn main:app --port 2200 --reload) and reachable from this page.`
+        `Couldn't connect to ${API_BASE || "the prediction API"}. Make sure the backend is running (uvicorn main:app --port 2200 --reload) and reachable from this page.`
       );
     } finally {
       setSubmitting(false);

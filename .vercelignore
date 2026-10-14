@@ -1,0 +1,7 @@
+# Not needed by the deployed app; keeps the serverless bundle small
+*.ipynb
+*.csv
+ML Project.html
+__pycache__/
+.venv/
+.vscode/

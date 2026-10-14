@@ -27,9 +27,9 @@ The interface describes results as **strained** (below 4), **balanced** (4 to be
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Form, result panel, and page structure |
-| `style.css` | Responsive visual design and gauge styling |
-| `script.js` | Client-side validation, API request, and result rendering |
+| `public/index.html` | Form, result panel, and page structure |
+| `public/style.css` | Responsive visual design and gauge styling |
+| `public/script.js` | Client-side validation, API request, and result rendering |
 | `main.py` | FastAPI app, request validation, and prediction endpoint |
 | `Mental_Health_Model.pkl` | Serialized scikit-learn pipeline used by the API |
 | `ML_Project.ipynb` | Data exploration, model training, evaluation, and export workflow |
@@ -62,16 +62,17 @@ The API will be available at `http://127.0.0.1:2200`. Interactive API documentat
 In a second terminal, from the project directory:
 
 ```powershell
-py -m http.server 5500
+py -m http.server 5500 --directory public
 ```
 
-Open `http://127.0.0.1:5500` in your browser. The page currently sends predictions to the hosted API by default. To use the API you started locally, change the `API_BASE` value near the top of `script.js` to:
+Open `http://127.0.0.1:5500` in your browser. When the page is opened from `localhost`/`127.0.0.1`, `script.js` sends predictions to the local API at `http://127.0.0.1:2200`; anywhere else (e.g. on Vercel) it calls the API on the same origin.
 
-```js
-const API_BASE = "http://127.0.0.1:2200";
-```
+## Deploy to Vercel
 
-The API enables CORS for browser requests. If you change its port or host, make sure `API_BASE` matches.
+The repo is set up for Vercel's zero-config FastAPI support: `main.py` exposes `app`, the frontend in `public/` is served as static files, and `.vercelignore` keeps the notebook and dataset out of the function bundle. `scikit-learn` is pinned to `1.9.0` because the saved model was trained with that version and does not load with others.
+
+1. Import the GitHub repo at [vercel.com/new](https://vercel.com/new) (framework preset: **FastAPI**), or run `npx vercel` from the project directory.
+2. Deploy. The web app is served at `/`, predictions at `/predict`, and API docs at `/docs`.
 
 ### Re-run the training notebook (optional)
 
@@ -85,7 +86,7 @@ Then launch Jupyter from the project directory and open `ML_Project.ipynb`. The 
 
 ## API
 
-### `GET /`
+### `GET /health`
 
 Returns a small welcome response.
 

@@ -8,7 +8,7 @@
 
 ## At a glance
 
-- **Try the web app:** [https://teen-mental-health-estimator-5hwytt6fp-dhrupti.vercel.app/](https://teen-mental-health-estimator-5hwytt6fp-dhrupti.vercel.app/)
+- **Try the web app:** [https://teen-mental-health-estimator.vercel.app/](https://teen-mental-health-estimator.vercel.app/)
 - **Interactive model notebook:** [`ML_Project.ipynb`](./ML_Project.ipynb)
 - **Model artifact:** [`Mental_Health_Model.pkl`](./Mental_Health_Model.pkl)
 - **Dataset:** [`Student Social Media And Mental Health Impact.csv`](./Student%20Social%20Media%20And%20Mental%20Health%20Impact.csv)
